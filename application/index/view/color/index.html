@@ -1,0 +1,155 @@
+
+	
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+
+        {include file="public/leftmenu" /}
+
+
+
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                	干洗店智能管理系统
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="{$Think.URL_PATH}gx/public/" class="am-icon-home">首页</a></li>
+                <li class="am-active">颜色</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-angle-right"></span> 颜色
+                    </div>
+
+
+
+                </div>
+                <div class="tpl-block">
+                    <div class="am-g">
+                        <div class="am-u-sm-12 am-u-md-4">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button id='order_id_btn' type="button" class="am-btn am-btn-default am-btn-secondary"><span id='order_id_span'  class=""></span> id排序</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-1" style="margin-right:45% ;">
+							<button id="plus_color_f" class="am-btn am-btn-success am-round"><i class="am-icon-plus"></i>增加颜色</button>
+						</div>
+
+                        
+                    </div>
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-id">ID</th>
+                                            <th class="table-author am-hide-sm-only">颜色</th>
+                                            <th class="table-author am-hide-sm-only">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+										{php}
+											if(isset($Colors) ){
+										{/php}
+											{volist name="Colors" id="Color" }
+											<tr id="tr_{$Color.color_id}">
+												<td>{$Color.color_id}</td>
+												<td>{$Color.color_name}</td>
+												<td>
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <button id="edit_btn_{$Color.color_id}" type="button" class="edit_class am-btn am-btn-default  am-text-secondary"><span class="am-icon-copy"></span> 编辑</button>
+                                                        <button id="del_btn_{$Color.color_id}" type="button" class="del_class am-btn am-btn-default  am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+											</tr>
+											{/volist}
+										{php}
+											}
+										{/php}
+                                    </tbody>
+                                </table>
+
+                                <div class="am-cf">
+
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination">
+											{$page_html}
+                                        </ul>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="{$Think.PUBLIC_PATH}static/js/jquery.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/amazeui.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/app.js"></script>
+    
+    <script>
+		$(document).on('click', '#plus_color_f', function(e) {
+			window.location.href='{$Think.URL_PATH}gx/public/index/color/add';
+		});
+		
+		
+
+	</script>
+	<script>
+		$(document).ready(function(){
+			$(".edit_class").click(this,function(){
+				id = this.id.split('_');
+			    window.location.href='{$Think.URL_PATH}gx/public/index/color/edit/id/' + id[2];
+			})
+		})
+		
+		$(document).ready(function(){
+			$(".del_class").click(this,function(){
+				if(confirm("确定要删除吗？")){
+				    id = this.id.split('_');
+			    	window.location.href='{$Think.URL_PATH}gx/public/index/color/del/id/' + id[2];
+				}
+			})
+		})
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			order_model = {$order1};
+			if( order_model == 1 ){
+				$("#order_id_span").attr("class", "am-icon-arrow-down");
+			}else if( order_model == 2 ){
+				$("#order_id_span").attr("class", "am-icon-arrow-up");
+			}
+		
+		}); 
+		$(document).on('click', '#order_id_btn', function(e) {
+			order_model = {$order1};
+			if( order_model == 2 ){
+				window.location.href='{$Think.URL_PATH}gx/public/index/color/index/order1/1/page1/' + {$page1};
+			}else{
+				window.location.href='{$Think.URL_PATH}gx/public/index/color/index/order1/2/page1/' + {$page1};
+			}
+		});
+	</script>
+</body>
+
+</html>

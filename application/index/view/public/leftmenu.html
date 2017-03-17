@@ -1,0 +1,89 @@
+<div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                操作菜单
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item ">
+                        <a href="{$Think.URL_PATH}gx/public/index/shouyi/index" class="nav-link active">
+                            <i class="am-icon-shopping-basket"></i>
+                            <span style="font-weight:bold;font-size: 18px;">收衣>>></span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="{$Think.URL_PATH}gx/public/" class="nav-link">
+                            <i class="am-icon-home"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+					<li class="tpl-left-nav-item">
+                        <a href="{$Think.URL_PATH}gx/public/index/orders/index" class="nav-link {php} if( $controller_name == 'orders' ){echo 'active2'; } {/php} tpl-left-nav-link-list">
+                            <i class="am-icon-list"></i>
+                            <span>订单列表</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="{$Think.URL_PATH}gx/public/index/clothes/index" class="nav-link {php} if( $controller_name == 'clothes' ){echo 'active2'; } {/php} tpl-left-nav-link-list">
+                            <i class="am-icon-list-alt"></i>
+                            <span>收衣列表</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="{$Think.URL_PATH}gx/public/index/title/index" class="nav-link {php} if( $controller_name == 'title' ){echo 'active2'; } {/php} tpl-left-nav-link-list">
+                            <i class="am-icon-navicon"></i>
+                            <span>衣物标题管理</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="{$Think.URL_PATH}gx/public/index/user/index" class="nav-link {php} if( $controller_name == 'user' ){echo 'active2'; } {/php} tpl-left-nav-link-list">
+                            <i class="am-icon-users"></i>
+                            <span>用户列表</span>
+                        </a>
+                    </li>
+                    
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-table"></i>
+                            <span>衣物特征</span>
+
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right {php} if( $controller_name == 'color' || $controller_name == 'brand' || $controller_name == 'xiaci' || $controller_name == 'xiaoguo' || $controller_name == 'chuli'  ){echo 'tpl-left-nav-more-ico-rotate'; } {/php}" ></i>
+                        </a>
+                        
+                        <ul class="tpl-left-nav-sub-menu" style="display: {php} if( $controller_name == 'color' || $controller_name == 'brand' || $controller_name == 'xiaci' || $controller_name == 'xiaoguo' || $controller_name == 'chuli'  ){echo 'block'; }else{ echo 'hidden'; } {/php};">
+                            <li>
+
+                                <a href="{$Think.URL_PATH}gx/public/index/color/index" {php} if( $controller_name == 'color' ){echo 'class="active"'; } {/php}>
+                                    <i class="am-icon-angle-right" ></i>
+                                    <span>颜色</span>
+                                </a>
+
+                                <a href="{$Think.URL_PATH}gx/public/index/brand/index" {php} if( $controller_name == 'brand' ){echo 'class="active"'; } {/php}>
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>品牌</span>
+								</a>
+								
+								<a href="{$Think.URL_PATH}gx/public/index/xiaci/index" {php} if( $controller_name == 'xiaci' ){echo 'class="active"'; } {/php}>
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>瑕疵</span>
+								</a>
+								
+								<a href="{$Think.URL_PATH}gx/public/index/xiaoguo/index" {php} if( $controller_name == 'xiaoguo' ){echo 'class="active"'; } {/php}>
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>洗后效果</span>
+								</a>
+                                        
+                                        <!-- 打开状态 a 标签添加 active 即可   -->
+                                <a href="{$Think.URL_PATH}gx/public/index/chuli/index" {php} if( $controller_name == 'chuli' ){echo 'class="active"'; } {/php}>
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>特殊处理</span>
+                                </a>
+                                
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+                
+            </div>
+        </div>

@@ -1,0 +1,315 @@
+
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+
+        {include file="public/leftmenu" /}
+
+
+
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                	干洗店智能管理系统
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="{$Think.URL_PATH}gx/public/" class="am-icon-home">首页</a></li>
+                <li class="am-active">用户列表</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-user"></span> 用户列表
+                    </div>
+
+
+
+                </div>
+                <div class="tpl-block">
+                    <div class="am-g">
+                        <div class="am-u-sm-12 am-u-md-4">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+
+								{php}
+							    if( !isset($sousuo_none_html) ){
+							    {/php}
+                                    <button id='order_zc_btn' type="button" class="am-btn am-btn-default am-btn-secondary"><span id='order_zc_span'  class=""></span> 注册顺序</button>
+                                    <button id='order_ye_btn' type="button" class="am-btn am-btn-default am-btn-secondary"><span id='order_ye_span'  class=""></span> 余额</button>
+                                    <button id='order_xf_btn' type="button" class="am-btn am-btn-default am-btn-secondary"><span id='order_xf_span'  class=""></span> 总消费金额</button>
+								{php}
+							    }
+							    {/php}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="am-u-sm-12 am-u-md-2">
+                        	<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+                        	<input id='starttime_ipt' value="{$starttime_text}" type="text" class="am-form-field" placeholder="开始日期" data-am-datepicker>
+                        	<span class="am-input-group-btn am-datepicker-add-on"><button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button></span>
+                        	</div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-2">
+                        	<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+                        	<input id='endtime_ipt' value="{$endtime_text}" type="text" class="am-form-field" placeholder="结束日期" data-am-datepicker>
+                        	<span class="am-input-group-btn am-datepicker-add-on"><button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button></span>
+                        	</div>
+                        </div>
+                        
+                        
+						<div class="am-u-sm-12 am-u-md-1">
+							<button id="time_search_f" class="am-btn am-btn-success am-round"><i class="am-icon-search"></i>时间查询</button>
+						</div>
+						
+						<div class="am-u-sm-12 am-u-md-1">
+
+                        </div>
+
+                        <div class="am-u-sm-12 am-u-md-2">
+                            <div class="am-input-group am-input-group-sm">
+                                <input id="tel_tz" type="text" class="am-form-field" placeholder="输入手机号或姓名..." value="{$tel_text}">
+                                <span class="am-input-group-btn">
+						        	<button id="tel_tz_f" class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
+						        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-id">ID</th>
+                                            <th class="table-author am-hide-sm-only">昵称</th>
+                                            <th class="table-author am-hide-sm-only">真实姓名</th>
+                                            <th class="table-author am-hide-sm-only">手机号</th>
+                                            <th class="table-author am-hide-sm-only">性别</th>
+                                            <th class="table-author am-hide-sm-only">生日</th>
+                                            <th class="table-author am-hide-sm-only">余额</th>
+                                            <th class="table-author am-hide-sm-only">实际消费金额</th>
+                                            <th class="table-author am-hide-sm-only">注册时间</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+										{php}
+											if(isset($users) ){
+										{/php}
+											{volist name="users" id="user" }
+											<tr>
+											<td>{$user.user_id}</td>
+											<td>{$user.nickname}</td>
+											<td>{$user.truename}</td>
+											<td>{$user.tel}</td>
+											<td>{$user.sex}</td>
+											<td>{$user.brithday}</td>
+											<td>{$user.yue}元</td>
+											<td>{$user.zonge2}元</td>
+											<td>{$user.add_time}</td>
+											</tr>
+											{/volist}
+										{php}
+											}
+										{/php}
+                                    </tbody>
+                                </table>
+                                {php}
+                                	if( isset($sousuo_none_html) ){
+                                		echo $sousuo_none_html;
+                                	}
+                                {/php}
+                                <div class="am-cf">
+
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination">
+                                            {php}
+                                            	if( isset($prev_page) ){
+                                            		echo $prev_page;
+                                            	}
+                                            {/php}
+                                            {php}
+                                            	if( isset($frist_dian) ){
+                                            		echo $frist_dian;
+                                            	}
+                                            {/php}
+                                            {php}
+                                            	if( isset($now_page_html) ){
+                                            		echo $now_page_html;
+                                            	}
+                                            {/php}
+                                            {php}
+                                            	if( isset($last_dian) ){
+                                            		echo $last_dian;
+                                            	}
+                                            {/php}
+                                            {php}
+                                            	if( isset($next_page) ){
+                                            		echo $next_page;
+                                            	}
+                                            {/php}
+                                            {php}
+                                            	if( isset($page_text_html) ){
+                                            		echo $page_text_html;
+                                            	}
+                                            {/php}
+                                            {php}
+                                            	if( isset($sousuo_html) ){
+                                            		echo $sousuo_html;
+                                            	}
+                                            {/php}
+                                        </ul>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script src="{$Think.PUBLIC_PATH}static/js/jquery.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/amazeui.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/app.js"></script>
+    <!--
+    	作者：736174965@qq.com
+    	时间：2017-01-17
+    	描述：js控件
+    -->
+
+	<script>
+		$(document).on('click', '#time_search_f', function(e) {
+			val_arr = rtUrl_val();
+			starttime = $('#starttime_ipt').val();
+			endtime = $('#endtime_ipt').val();
+			if( starttime == '' && endtime == ''){
+				alert('至少选择一个时间！');
+			}else if( starttime != '' && endtime != '' ){
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/where2/'+ starttime + '/where3/' + endtime + '/' + val_arr[0];
+			}else if( starttime != ''){
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/where2/'+ starttime + '/' + val_arr[0];
+			}else if( endtime != ''){
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/where3/'+ endtime + '/' + val_arr[0];
+			}
+			//alert(starttime);
+			//alert(endtime);
+			//window.location.href='{$Think.URL_PATH}gx/public/index/user/index/where1/'+ tel + '/' + val_arr[1] + val_arr[2];
+			
+		});
+		
+		$(document).on('click', '#tel_tz_f', function(e) {
+			val_arr = rtUrl_val();
+			tel = $('#tel_tz').val();
+
+			window.location.href='{$Think.URL_PATH}gx/public/index/user/index/where1/'+ tel + '/' + val_arr[1] + val_arr[2];
+			
+		});
+		
+		$(document).on('click', '#page_tz_f', function(e) {
+		 
+		  page = $('#page_tz').val();
+			if($.isNumeric(page)){
+				if( page > {$count} || page <= 0 ){
+					alert('请输入正确的数字');
+				}else{
+					val_arr = rtUrl_val();
+					window.location.href = '{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[3] + 'page1/' + page;
+				}
+			}else{
+				alert('请输入正确的数字');
+			}
+		 
+		});
+		
+		$(document).on('click', '#order_zc_btn', function(e) {
+			order_model = {$order_model};
+			val_arr = rtUrl_val();
+			if( order_model == 2 ){
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[4] + 'order1/' + 1;
+			}else{
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[4] + 'order1/' + 2;
+			}
+		});
+		
+		$(document).on('click', '#order_ye_btn', function(e) {
+			order_model = {$order_model};
+			val_arr = rtUrl_val();
+			if( order_model == 4 ){
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[4] + 'order1/' + 3;
+			}else{
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[4] + 'order1/' + 4;
+			}
+		});
+		
+		$(document).on('click', '#order_xf_btn', function(e) {
+			order_model = {$order_model};
+			val_arr = rtUrl_val();
+			if( order_model == 6 ){
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[4] + 'order1/' + 5;
+			}else{
+				window.location.href='{$Think.URL_PATH}gx/public/index/user/index/' + val_arr[0] + val_arr[1] + val_arr[2] + val_arr[4] + 'order1/' + 6;
+			}
+		});
+		
+		
+		function rtUrl_val(){
+    		{$js_val_arr}
+    		return val_arr; 
+    	}
+		
+		
+	</script>
+	<script>
+		$(document).ready(function(){
+			order_model = {$order_model};
+			if( order_model == 1 ){
+				$("#order_zc_span").attr("class", "am-icon-arrow-down");
+				$("#order_ye_span").attr("class", "am-icon-arrow-down");
+				$("#order_xf_span").attr("class", "am-icon-arrow-down");
+			}else if( order_model == 2 ){
+				$("#order_zc_span").attr("class", "am-icon-arrow-up");
+				$("#order_ye_span").attr("class", "am-icon-arrow-down");
+				$("#order_xf_span").attr("class", "am-icon-arrow-down");
+			}else if( order_model == 3 ){
+				$("#order_zc_span").attr("class", "am-icon-arrow-down");
+				$("#order_ye_span").attr("class", "am-icon-arrow-down");
+				$("#order_xf_span").attr("class", "am-icon-arrow-down");
+			}else if( order_model == 4 ){
+				$("#order_zc_span").attr("class", "am-icon-arrow-down");
+				$("#order_ye_span").attr("class", "am-icon-arrow-up");
+				$("#order_xf_span").attr("class", "am-icon-arrow-down");
+			}else if( order_model == 5 ){
+				$("#order_zc_span").attr("class", "am-icon-arrow-down");
+				$("#order_ye_span").attr("class", "am-icon-arrow-down");
+				$("#order_xf_span").attr("class", "am-icon-arrow-down");
+			}else if( order_model == 6 ){
+				$("#order_zc_span").attr("class", "am-icon-arrow-down");
+				$("#order_ye_span").attr("class", "am-icon-arrow-down");
+				$("#order_xf_span").attr("class", "am-icon-arrow-up");
+			}
+		
+		}); 
+	</script>
+</body>
+
+</html>

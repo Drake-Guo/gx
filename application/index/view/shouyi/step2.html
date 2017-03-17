@@ -1,0 +1,730 @@
+
+    <div class="tpl-page-container ">
+
+
+        {include file="public/leftmenu" /}
+
+<style>
+	.td:hover{
+		color: red !important;
+		cursor:pointer;
+	}
+	.ofh{
+		overflow: hidden;
+		height:48px !important;
+		text-overflow:ellipsis !important;
+		white-space: nowrap;
+		color: #337ab7;
+		cursor:pointer;
+	}
+	.selected{
+		background-color:#A2CD5A !important;
+	}
+</style>
+	
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                	干洗店智能管理系统
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="{$Think.URL_PATH}gx/public/" class="am-icon-home">首页</a></li>
+                <li class="am-active">收衣</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-clone"></span>    Step2.收衣
+                    </div>
+                    <div class="caption font-red bold">
+                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="caption font-red bold">
+                            	{$user['truename']} - {$user['sex']} - {$user['tel']}
+                            	
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-1" style="margin-right:45% ;">
+							<button id="plus_row_f" class="am-btn am-btn-success am-round"><i class="am-icon-plus"></i>新增</button>
+						</div>
+
+
+
+                </div>
+                <div class="tpl-block">
+
+                    <div class="am-g">
+                        	           	
+                            <div class="am-u-sm-12 ">
+                            <div class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-type">编号</th>
+                                            <th class="table-title">衣物标题</th>
+                                            <th class="table-type">颜色</th>
+                                            <th class="table-type">品牌</th>
+                                            <th class="table-type">瑕疵</th>
+                                            <th class="table-type">洗后效果</th>
+                                            <th class="table-type">特殊处理</th>
+                                            <th class="table-date am-hide-sm-only">价格</th>
+                                            <th class="table-set">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='tbody'>
+                                    	
+                                        <tr class="tr" >
+                                            <td id='clothes_id'>1</td>
+                                            <td class='td selected title_c' id='title' val=""></td>
+                                            <td class='td' id='color'></td>
+                                            <td class='td' id='brand'></td>
+                                            <td class='td' id='xiaci'></td>
+                                            <td class='td' id='xiaoguo'></td>
+                                            <td class='td' id='chuli'></td>
+                                            <td class='td price_c' id="jine">0.00</td>
+
+                                            <td>
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <button type="button" class="copy_class am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-copy"></span> 复制</button>
+                                                        <button type="button" class="del_class am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+ 
+                                    
+                                    </tbody>
+                                </table>
+
+                                <hr>
+
+                            </div>
+                            
+                            
+                            <div class="tpl-block">
+                            	<form id="form_tjdingdan" method="post" action="{$Think.URL_PATH}gx/public/index/shouyi/dodingdan">
+
+                            		<input id='values' name="values" type="hidden" value=""/>
+                            		<input type="hidden" name="user_id" value="{$user['user_id']}"/>
+                            		<input type="hidden" name="truename" value="{$user['truename']}"/>
+                            		<input type="hidden" name="tel" value="{$user['tel']}"/>
+                            		<input type="hidden" name="price" id="value_price"/>
+									<button id="jiezhang" type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success" style="background-color: #F37B1D !important;float: right;"><i class="am-icon-rmb"></i>提交订单</button>
+								</form>
+				        	</div>
+                        </div>
+                            
+
+	
+			          
+
+
+                            <div class="am-u-lg-12" id="bianhua">
+                            	
+                            	<div class="tpl-block">
+				                    <div class="am-g">
+				                        <div class="tpl-form-body tpl-form-line">
+				                            <form class="am-form tpl-form-line-form">
+				                                <div class="am-form-group">
+				                                	
+				                                    <label for="user-name" class="am-u-sm-3 am-form-label">衣物标题 <span class="tpl-form-line-small-title">Title</span></label>
+				                                    <div class="am-u-sm-9">
+				                                        <input name="title" type="text" class="tpl-form-input"  placeholder="请输入衣物标题">
+				                                        <small id="tishi1" style="color:red"></small>
+				                                    </div>
+				                                </div>
+				                                <div class="am-form-group">
+				                                    <div class="am-u-sm-9 am-u-sm-push-3">
+				                                        <button id="ajax_add_title" type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">添加标题</button>
+				                                    </div>
+				                                </div>
+				                            </form>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="am-g">
+				                	{php}
+					                	foreach( $letters as $key => $val){
+					                		if( isset($shouzimus[$val]) ){
+					                {/php}
+					                			<div class="am-u-sm-1 am-u-end" style="font-weight: 700;"><a href="#{$val}">{$val}</a></div>
+					                
+					                {php}
+					                		}else{
+					                {/php}
+					                			<div class="am-u-sm-1 am-u-end" style="color:#888">{$val}</div>
+					                {php}
+					                		}
+					                	}
+				                	{/php}
+                            		
+                            	</div>
+                            	<hr>
+                            	
+                            	<div class="am-g" id="xinzeng" style="display:none">
+									<div class="am-u-sm-12 am-u-end " style="font-weight: 700;" >新增</div>
+                            		
+
+                            		
+								</div>
+                            	
+                            	<div class="am-g">
+                            		{php}
+	                            		foreach( $shouzimus as $key => $val ){
+	                            	{/php}
+	                            			<div class="am-u-sm-12 am-u-end " style="font-weight: 700;" id="{$key}">{$key}</div>
+	                            	{php}
+	                            			foreach( $shouzimus[$key] as $key2 => $val2 ){
+                            		{/php}
+                            					<div class="am-u-sm-2 am-u-end ofh" title="{$val2['title']}" id="title_checked">{$val2['title']}</div>
+                            		{php}
+                            				}
+                            			}
+                            		{/php}
+                            		
+								</div>
+                            	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                            	
+                            	
+				                
+				                
+
+                            	
+                            	
+                            	
+                                <div class="am-cf">
+
+                                </div>
+                                <hr>
+                            </div>
+
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    
+    
+    <script src="{$Think.PUBLIC_PATH}static/js/jquery.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/amazeui.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/app.js"></script>
+    
+    <script>
+
+		$(document).ready(function(){
+			
+		}); 
+		
+		
+	</script>
+	
+	<script>
+		//提交订单
+		$(document).on('click', '#jiezhang', function(e) {
+			freshen();
+			str = rtValuesStr();
+			if(confirm(str)){
+				$('#form_tjdingdan').submit();
+			}
+		});
+		
+		
+	</script>
+	
+
+	
+	
+	<script>
+		//Title失去和获得焦点，触发的事件
+		$(document).on('click', '.title_c', function(e) {
+			if( !$(this).children('input').length && !$(this).children('input').length>0 ){
+				var text = $(this).text();
+				$(this).text('');
+				$(this).append('<input type="text" class="title_input" value="' + text + '"/>');
+				$(this).children('input').focus();
+			}
+		});
+		$(document).on('blur', '.title_input', function(e) {
+			var value = $(this).val();
+			var now_td = $(this).parent('td');
+			$(this).remove();
+			now_td.text(value);
+			now_td.attr('val',value);
+		});
+		
+		
+		//Price失去和获得焦点，触发的事件
+		$(document).on('click', '.price_c', function(e) {
+			if( !$(this).children('input').length && !$(this).children('input').length>0 ){
+				var text = $(this).text();
+				$(this).text('');
+				$(this).append('<input type="text" class="price_input" value="' + text + '"/>');
+				$(this).children('input').focus();
+			}
+		});
+		$(document).on('blur', '.price_input', function(e) {
+			var value = parseFloat($(this).val());
+			if( !value ){
+				value = 0;
+			}
+			var now_td = $(this).parent('td');
+			$(this).remove();
+			now_td.text(value);
+			now_td.attr('val',value);
+		});
+	</script>
+	<!-- [ajax] 增加数据  -->
+	<script>
+		
+		//增加标题
+		$(document).on('click', '#ajax_add_title', function(e) {
+			var title = $("input[name='title']").val();
+			var tishi1 = $("#tishi1");
+			if( !title ){
+				tishi1.text('名称不能为空！');exit;
+			}
+			
+			$.ajax({
+				type: "get", 
+				url:"{$Think.URL_PATH}gx/public/index/shouyi/ajaxAddTitle",
+				data: {'title':title},
+				dataType: "json",
+				async:false,
+				success: function (data) {
+					if( data['status'] == 1 ){
+						tishi1.attr('style','color:#5eb95e;font-weight:700');
+						tishi1.text('添加成功！');
+						$('#xinzeng').css('display','block');
+						$('#xinzeng').append('<div class="am-u-sm-2 am-u-end ofh" title="'+ data['title'] +'" id="title_checked">'+ data['title'] +'</div>');
+					}else if(  data['status'] == 2  ){
+						tishi1.attr('style','color:red;font-weight:700');
+						tishi1.text('开头必须为汉字或者字母！');
+					}
+					
+				}, 
+				error: function (XMLHttpRequest, textStatus, errorThrown) { 
+					tishi1.attr('style','color:red');
+					tishi1.text('服务器错误，请刷新后重试！');
+				} 
+			});
+
+		});
+		
+		
+		
+	</script>
+	
+	<script>
+		//统计当前所有值，并返回数组
+		function getAllValues(){
+			var trs = $('.tr');
+			var len = trs.length;
+			trs.each(function (index,dom){
+			   $(dom).children('#clothes_id').text(index+1);
+			});
+		}
+		//设置值
+		function setValues( tr, td, value ){
+			tr = tr-1;
+			var values = $("#values").text().split("|");
+			var now_tr_values = values[tr].split(",");
+			//写入values
+			now_tr_values[td] = value;
+			now_tr_values = now_tr_values.join(",");
+			values[tr] = now_tr_values;
+			values = values.join("|");
+			$("#values").text(values);
+		}
+		//获取价格  type:1是小类价格 2是特殊处理价格
+		function getPrice( tr, type ){
+			tr = tr-1;
+			var values = $("#values").text().split("|");
+			var now_tr_values = values[tr].split(",");
+			if( type == 1 ){
+				price = now_tr_values[1];
+				price = price.split(":");
+				price = price[1];
+				if( !price ){
+					price = 0;
+				}
+			}else if( type == 2 ){
+				price = now_tr_values[6];
+				price = price.split(":");
+				price = price[1];
+				if( !price ){
+					price = 0;
+				}
+			}
+			return price;
+		}
+		
+		//重新检索values，并将值写入html。
+		function freshen(){
+			var trs = $('.tr');
+			var str = '';
+			trs.each(function (index,dom){
+				if( $(dom).children('#title').attr('val') ){
+					str = str + $(dom).children('#title').attr('val') + ",";
+				}else{
+					str = str + ",";
+				}
+				if( $(dom).children('#color').attr('val')){
+					str = str + $(dom).children('#color').attr('val') + ",";
+				}else{
+					str = str + ",";
+				}
+				if( $(dom).children('#brand').attr('val')){
+					str = str + $(dom).children('#brand').attr('val') + ",";
+				}else{
+					str = str + ",";
+				}
+				if( $(dom).children('#xiaci').attr('val')){
+					str = str + $(dom).children('#xiaci').attr('val') + ",";
+				}else{
+					str = str + ",";
+				}
+				if( $(dom).children('#xiaoguo').attr('val')){
+					str = str + $(dom).children('#xiaoguo').attr('val') + ",";
+				}else{
+					str = str + ",";
+				}
+				if( $(dom).children('#chuli').attr('val')){
+					str = str + $(dom).children('#chuli').attr('val') + ",";
+				}else{
+					str = str + ",";
+				}
+				if( $(dom).children('#jine').attr('val')){
+					str = str + $(dom).children('#jine').attr('val') + "|";
+				}else{
+					str = str + "0.00|";
+				}
+
+			});
+			$('#values').val(str);
+		}
+		
+		//检索values，将数据保存为提交订单的字符串，并返回。
+		function rtValuesStr(){
+			//请确认信息：\n------------\n1.羊毛衣 白色 缺毛-¥19.8\n2.西服套装-¥20.0\n------------\n总价¥29.8\n------------
+			var trs = $('.tr');
+			var str = '请确认信息：\n------------\n';
+			var price = 0;
+			trs.each(function (index,dom){
+				str = str + (index+1) + '.';
+				if( $(dom).children('#title').text() ){
+					str = str + $(dom).children('#title').text() + " ";
+				}else{
+					str = str + " ";
+				}
+				if( $(dom).children('#color').text() ){
+					str = str + $(dom).children('#color').text() + " ";
+				}else{
+					str = str + " ";
+				}
+				if( $(dom).children('#brand').text() ){
+					str = str + $(dom).children('#brand').text() + " ";
+				}else{
+					str = str + " ";
+				}
+				if( $(dom).children('#xiaci').text() ){
+					str = str + $(dom).children('#xiaci').text() + " ";
+				}else{
+					str = str + " ";
+				}
+				if( $(dom).children('#xiaoguo').text() ){
+					str = str + $(dom).children('#xiaoguo').text() + " ";
+				}else{
+					str = str + " ";
+				}
+				if( $(dom).children('#chuli').text() ){
+					str = str + $(dom).children('#chuli').text() + " ";
+				}else{
+					str = str + " ";
+				}
+				if( $(dom).children('#jine').text() ){
+					str = str + '-¥' + $(dom).children('#jine').text() + "\n";
+				}else{
+					str = str + "-¥0.00\n";
+				}
+				price = add(price,parseFloat($(dom).children('#jine').text()));
+
+			});
+			//price = parseFloat(price);
+			str = str + "------------\n总价¥" + price + "\n------------";
+			$('#value_price').val(price);
+			return str;
+			//$('#values').text(str);
+		}
+	</script>
+	
+	<script>
+		//单击衣物标题
+		$(document).on('click', '#title', function(e) {
+			$('.selected').removeClass('selected');
+			$(this).addClass('selected');
+			htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getTitleHtml",
+					async:false
+				});
+			$('#bianhua').html(htmlobj.responseText);
+		});
+
+		
+		//单击颜色
+		$(document).on('click', '#color', function(e) {
+			var cls = $(this).attr('class');
+			if( cls ){
+				var now_row = $(this).parent().children('#clothes_id').text();
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+				htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getColorHtml",
+					async:false
+				});
+				$('#bianhua').html(htmlobj.responseText);
+			}
+
+		});
+		
+		//单击品牌
+		$(document).on('click', '#brand', function(e) {
+			var cls = $(this).attr('class');
+			if( cls ){
+				var now_row = $(this).parent().children('#clothes_id').text();
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+				htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getBrandHtml",
+					async:false
+				});
+				$('#bianhua').html(htmlobj.responseText);
+			}
+
+		});
+		
+		//单击瑕疵
+		$(document).on('click', '#xiaci', function(e) {
+			var cls = $(this).attr('class');
+			if( cls ){
+				var now_row = $(this).parent().children('#clothes_id').text();
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+				htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getXiaciHtml",
+					async:false
+				});
+				$('#bianhua').html(htmlobj.responseText);
+			}
+
+		});
+		
+		//单击洗后效果
+		$(document).on('click', '#xiaoguo', function(e) {
+			var cls = $(this).attr('class');
+			if( cls ){
+				var now_row = $(this).parent().children('#clothes_id').text();
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+				htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getXiaoguoHtml",
+					async:false
+				});
+				$('#bianhua').html(htmlobj.responseText);
+			}
+
+		});
+		
+		//单击特殊处理
+		$(document).on('click', '#chuli', function(e) {
+			var cls = $(this).attr('class');
+			if( cls ){
+				var now_row = $(this).parent().children('#clothes_id').text();
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+				htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getChuliHtml",
+					async:false
+				});
+				$('#bianhua').html(htmlobj.responseText);
+			}
+
+		});
+		
+		//单击价格
+		$(document).on('click', '#jine', function(e) {
+			$('.selected').removeClass('selected');
+			$(this).addClass('selected');
+
+			$('#bianhua').html("");
+		});
+	</script>
+	
+	<script>
+	
+		
+		
+		
+		//选择标题的值
+		$(document).on('click', '#title_checked', function(e) {
+			var now_tr = $(".selected").parent('tr');
+			var tr_id = now_tr.children("#clothes_id").text();
+			now_tr.children('#title').text( now_tr.children('#title').text() + $(this).text() );
+			now_tr.children('#title').attr('val',now_tr.children('#title').text());
+			
+		});
+		
+		//选择颜色的值
+		$(document).on('click', '#color_checked', function(e) {
+			var now_tr = $(".selected").parent('tr');
+			var tr_id = now_tr.children("#clothes_id").text();
+
+			now_tr.children('#color').text($(this).text());
+			now_tr.children('#color').attr('val',$(this).attr('val'));
+			setValues( tr_id, 2, $(this).attr('val'));
+
+			now_tr.children('#brand').addClass('td');
+
+			if( now_tr.children('#brand').attr('val') ){
+					
+			}else{
+				$('.selected').removeClass('selected');
+				now_tr.children('#brand').addClass('selected');
+				htmlobj = $.ajax({
+					type:"get",
+					url:"{$Think.URL_PATH}gx/public/index/shouyi/getBrandHtml",
+					async:false
+				});
+				$('#bianhua').html(htmlobj.responseText);
+			}
+
+		});
+		
+		//选择品牌的值
+		$(document).on('click', '#brand_checked', function(e) {
+			var now_tr = $(".selected").parent('tr');
+			var tr_id = now_tr.children("#clothes_id").text();
+			
+			now_tr.children('#brand').text($(this).text());
+			now_tr.children('#brand').attr('val',$(this).attr('val'));
+			setValues( tr_id, 3, $(this).attr('val'));
+		});
+		
+		//选择瑕疵的值
+		$(document).on('click', '#xiaci_checked', function(e) {
+			var now_tr = $(".selected").parent('tr');
+			var tr_id = now_tr.children("#clothes_id").text();
+			now_tr.children('#xiaci').text($(this).text());
+			now_tr.children('#xiaci').attr('val',$(this).attr('val'));
+			setValues( tr_id, 4, $(this).attr('val'));
+		});
+		
+		//选择洗后效果的值
+		$(document).on('click', '#xiaoguo_checked', function(e) {
+			var now_tr = $(".selected").parent('tr');
+			var tr_id = now_tr.children("#clothes_id").text();
+			now_tr.children('#xiaoguo').text($(this).text());
+			now_tr.children('#xiaoguo').attr('val',$(this).attr('val'));
+			setValues( tr_id, 5, $(this).attr('val'));
+			
+		});
+		
+		//选择特殊处理的值
+		$(document).on('click', '#chuli_checked', function(e) {
+			var now_tr = $(".selected").parent('tr');
+			var tr_id = now_tr.children("#clothes_id").text();
+			now_tr.children('#chuli').text($(this).text());
+			now_tr.children('#chuli').attr('val',$(this).attr('val'));
+		});
+		
+	</script>
+	
+	<script>
+		//删除行
+		$(document).on('click', '.del_class', function(e) {
+			if( $('.tr').length == 1 ){
+				alert('最后一行不能删除！');
+			}else{
+				if(confirm("确定要删除吗？")){
+	    			tr = $(this).parents('tr');
+					tr.remove();
+					var tr_id = tr.children("#clothes_id").text();
+
+					trs = $('tr');
+					trs.each(function (index,dom){
+					   $(dom).children('#clothes_id').text(index);
+					});
+
+					if( $('.selected').length == 0 ){
+						$('#bianhua').html("");
+					}
+					freshen();
+				}
+			}
+		});
+		//复制行
+		$(document).on('click', '.copy_class', function(e) {
+			tbody = $('#tbody');
+			var tr_count = $('tr').length;
+	    	tr_clone = $(this).parent().parent().parent().parent().clone();
+	    	tr_clone.children('#clothes_id').text(tr_count);
+	    	tr_clone.children('.selected').removeClass("selected");
+			tbody.append(tr_clone);
+			freshen();
+				
+		});
+		//增加行
+		$(document).on('click', '#plus_row_f', function(e) {
+			var tr_count = $('tr').length;
+			
+			tbody = $('#tbody');
+			//var len = trs.length;
+			tbody.append('<tr class="tr" ><td id="clothes_id">' + tr_count + '</td><td class="td title_c" id="title"></td><td id="color" class="td"></td><td id="brand" class="td"></td><td id="xiaci" class="td"></td><td id="xiaoguo" class="td"></td><td id="chuli" class="td"></td><td id="jine"  class="td price_c">0</td><td><div class="am-btn-toolbar"><div class="am-btn-group am-btn-group-xs"><button type="button" class="copy_class am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-copy"></span> 复制</button><button type="button" class="del_class am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button></div></div></td></tr>');
+			
+			
+			freshen();
+		});
+		
+		//解决浮点数加法bug的两组函数
+		function add(a, b) {
+		    var c, d, e;
+		    try {
+		        c = a.toString().split(".")[1].length;
+		    } catch (f) {
+		        c = 0;
+		    }
+		    try {
+		        d = b.toString().split(".")[1].length;
+		    } catch (f) {
+		        d = 0;
+		    }
+		    return e = Math.pow(10, Math.max(c, d)), (mul(a, e) + mul(b, e)) / e;
+		}
+		function mul(a, b) {
+		    var c = 0,
+		        d = a.toString(),
+		        e = b.toString();
+		    try {
+		        c += d.split(".")[1].length;
+		    } catch (f) {}
+		    try {
+		        c += e.split(".")[1].length;
+		    } catch (f) {}
+		    return Number(d.replace(".", "")) * Number(e.replace(".", "")) / Math.pow(10, c);
+		}
+
+	</script>
+</body>
+
+</html>

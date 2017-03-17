@@ -1,0 +1,262 @@
+
+	
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+
+        {include file="public/leftmenu" /}
+
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                	干洗店智能管理系统
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="{$Think.URL_PATH}gx/public/" class="am-icon-home">首页</a></li>
+                <li class="am-active">订单列表</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-list"></span> 订单列表
+                    </div>
+
+
+
+                </div>
+                <div class="tpl-block">
+                    <div class="am-g">
+                        <div class="am-u-sm-12 am-u-md-2">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="am-u-sm-12 am-u-md-2">
+                        	<select data-am-selected style="display: none;" id="status_c">
+                        		
+            					<option value="0" {php}if( !$where1){ echo "selected"; } {/php}>全部</option>
+								<option value="3" {php}if( $where1 ==3){ echo "selected"; } {/php}>已付款</option>
+								<option value="2" {php}if( $where1 ==2){ echo "selected"; } {/php} >赊账</option>
+								<option value="1" {php}if( $where1 ==1){ echo "selected"; } {/php} >已完成</option>
+							</select>
+                        </div>
+                        
+                        <div class="am-u-sm-12 am-u-md-2">
+                        	<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+                        	<input id='starttime_ipt' value="{$where2}" type="text" class="am-form-field" placeholder="开始日期" data-am-datepicker>
+                        	<span class="am-input-group-btn am-datepicker-add-on"><button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button></span>
+                        	</div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-2">
+                        	<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+                        	<input id='endtime_ipt' value="{$where3}" type="text" class="am-form-field" placeholder="结束日期" data-am-datepicker>
+                        	<span class="am-input-group-btn am-datepicker-add-on"><button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button></span>
+                        	</div>
+                        </div>
+                        
+                        
+						<div class="am-u-sm-12 am-u-md-1">
+							<button id="time_search_f" class="am-btn am-btn-success am-round"><i class="am-icon-search"></i>时间查询</button>
+						</div>
+						
+						<div class="am-u-sm-12 am-u-md-1">
+
+                        </div>
+
+                        <div class="am-u-sm-12 am-u-md-2" style="display: none;">
+                            <div class="am-input-group am-input-group-sm">
+                                <input id="tel_tz" type="text" class="am-form-field" placeholder="订单编号/顾客姓名/手机号..." value="">
+                                <span class="am-input-group-btn">
+						        	<button id="tel_tz_f" class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
+						        </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-id">订单编号</th>
+                                            
+                                            <th class="table-author am-hide-sm-only">顾客姓名 - 手机</th>
+                                            <th class="table-author am-hide-sm-only">总价</th>
+                                            <th class="table-author am-hide-sm-only">时间</th>
+                                            <th class="table-author am-hide-sm-only">状态</th>
+                                            
+                                            <th class="table-author am-hide-sm-only">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    		{php}
+												if(isset($Orders) ){
+											{/php}
+												{volist name="Orders" id="Order" }
+
+												
+												
+												<tr>
+													<td>{$Order.orders_id}</td>
+													<td colspan="5"><a href="{$Think.URL_PATH}gx/public/index/orders/details/id/{$Order.orders_id}">{$Order.title}</a></td>
+	
+												</tr>
+												<tr>
+													<td></td>
+													<td>{$Order.truename} - {$Order.tel}</td>
+													<td>{$Order.jine}元</td>
+													<td>{php}echo date('Y-m-d H:i:s',$Order['add_time']){/php}</td>
+													<td>
+														{php}
+															if( $Order['status'] == 1){
+																echo "已完成";
+															}elseif( $Order['payway'] == 0 ){
+																echo "赊账";
+															}elseif( $Order['payway'] == 1 ){
+																echo "已付款（现金）";
+															}elseif( $Order['payway'] == 2 ){
+																echo "已付款（微信）";
+															}elseif( $Order['payway'] == 3 ){
+																echo "已付款（支付宝）";
+															}
+														{/php}
+														
+													</td>
+													<td><a href="{$Think.URL_PATH}gx/public/index/orders/details/id/{$Order.orders_id}">查看详情</a></td>
+												</tr>
+												{/volist}
+											{php}
+												}
+											{/php}
+											<tr style="display:none">
+												<td>200709082324</td>
+												<td colspan="5"><a href="#">牛仔、潮流风衣</a></td>
+
+											</tr>
+											<tr style="display:none">
+												<td></td>
+												<td>张飞 - 13811118883</td>
+												<td>99.99元</td>
+												<td>2017年1月23日 18:30:33</td>
+												<td>已付款（现金）</td>
+												<td><a href="#">查看详情</a></td>
+											</tr>
+											
+											<tr style="display:none">
+												<td>200709082324</td>
+												<td colspan="5"><a href="#">牛仔、潮流风衣（共2件衣物。0/2已取走）</a></td>
+
+											</tr>
+											<tr style="display:none">
+												<td></td>
+												<td>张飞 - 13811118883</td>
+												<td>99.99元</td>
+												<td>2017年1月23日 18:30:33</td>
+												<td>已付款（微信）</td>
+												<td><a href="#">查看详情</a></td>
+											</tr>
+											
+											<tr style="display:none">
+												<td>200709082324</td>
+												<td colspan="5"><a href="#">牛仔、潮流风衣、卫衣（共3件衣物。1/3已取走）</a></td>
+
+											</tr>
+											<tr style="display:none">
+												<td></td>
+												<td>张飞 - 13811118883</td>
+												<td>99.99元</td>
+												<td>2017年1月23日 18:30:33</td>
+												<td>赊账</td>
+												<td><a href="#">查看详情</a></td>
+											</tr>
+											
+											<tr style="display:none">
+												<td>200709082324</td>
+												<td colspan="5"><a href="#">牛仔、潮流风衣</a></td>
+
+											</tr>
+											<tr style="display:none">
+												<td></td>
+												<td>张飞 - 13811118883</td>
+												<td>99.99元</td>
+												<td>2017年1月23日 18:30:33</td>
+												<td>已完成</td>
+												<td><a href="#">查看详情</a></td>
+											</tr>
+                                    </tbody>
+                                </table>
+                                
+                              
+
+                                <div class="am-cf">
+
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination">
+											{$page_html}
+                                        </ul>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="{$Think.PUBLIC_PATH}static/js/jquery.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/amazeui.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/app.js"></script>
+    
+    <script>
+    	$(document).on('click', '#time_search_f', function(e) {
+			val_arr = rtUrl_val();
+			starttime = $('#starttime_ipt').val();
+			endtime = $('#endtime_ipt').val();
+			if( starttime == '' && endtime == ''){
+				alert('至少选择一个时间！');
+			}else if( starttime != '' && endtime != '' ){
+				window.location.href='{$Think.URL_PATH}gx/public/index/orders/index/where2/'+ starttime + '/where3/' + endtime + '/' + val_arr[0];
+			}else if( starttime != ''){
+				window.location.href='{$Think.URL_PATH}gx/public/index/orders/index/where2/'+ starttime + '/' + val_arr[0];
+			}else if( endtime != ''){
+				window.location.href='{$Think.URL_PATH}gx/public/index/orders/index/where3/'+ endtime + '/' + val_arr[0];
+			}
+			//alert(starttime);
+			//alert(endtime);
+			//window.location.href='{$Think.URL_PATH}gx/public/index/user/index/where1/'+ tel + '/' + val_arr[1] + val_arr[2];
+			
+		});
+		
+		$(document).on('change', '#status_c', function(e) {
+			var val = $(this).val();
+			starttime = $('#starttime_ipt').val();
+			endtime = $('#endtime_ipt').val();
+			//alert('{$Think.URL_PATH}gx/public/index/orders/index/where1/' + val + '/where2/'+ starttime + '/where3/'+ endtime + '/');
+			window.location.href='{$Think.URL_PATH}gx/public/index/orders/index/where1/' + val + '/where2/'+ starttime + '/where3/'+ endtime + '/' ;
+		});
+		
+		function rtUrl_val(){
+    		{$js_val_arr}
+    		return val_arr;
+    	}
+    	
+    </script>
+
+</body>
+
+</html>

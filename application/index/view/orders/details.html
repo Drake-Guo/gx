@@ -1,0 +1,331 @@
+
+	
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+
+        {include file="public/leftmenu" /}
+
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                	干洗店智能管理系统
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="{$Think.URL_PATH}gx/public/" class="am-icon-home">首页</a></li>
+                <li class="am-active">订单列表</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-list"></span> 订单列表
+                    </div>
+                    <div class="caption font-red bold">
+                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="caption  bold">
+                            	{$order['truename']} - {$order['tel']}      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            	
+                            	{php}
+                            	if( $order['payway'] == 0 ){
+                            	{/php}
+                            	
+                            	收款（{$order['jine']}元）： <button id="xj_btn" style="color:#F37B1D" type="button" class="del_class  am-btn am-btn-default am-btn-xs am-text-"><span class="am-icon-rmb"></span> 现金</button>  <button id="wx_btn"  type="button" class="del_class  am-btn am-btn-default am-btn-xs am-text-success"><span class="am-icon-wechat"></span> 微信</button>  <button id="zfb_btn" type="button" class="del_class  am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-copy"></span> 支付宝</button>  
+                            	
+                            	当前状态：<span style="color:red">赊账</span>    
+                            	
+                            	{php}
+                            	}
+                            	{/php}
+                            	
+                            	{php}
+                            	if( $order['payway'] == 1 ){
+                            	{/php}
+                            	                            	
+                            	当前状态：<span style="color:green">已付款（现金）{$order['jine']}元</span>    
+                            	
+                            	{php}
+                            	}
+                            	{/php}
+                            	
+                            	{php}
+                            	if( $order['payway'] == 2 ){
+                            	{/php}
+                            	                            	
+                            	当前状态：<span style="color:green">已付款（微信）{$order['jine']}元</span>    
+                            	
+                            	{php}
+                            	}
+                            	{/php}
+                            	
+                            	{php}
+                            	if( $order['payway'] == 3 ){
+                            	{/php}
+                            	                            	
+                            	当前状态：<span style="color:green">已付款（支付宝）{$order['jine']}元</span>    
+                            	
+                            	{php}
+                            	}
+                            	{/php}
+                                {php}
+                                    if( $order['status'] == 1 ){
+                                {/php}
+                                &nbsp;&nbsp;&nbsp;<span style="color:red">[订单已完成！]</span>
+                                {php}
+                                    }
+                                {/php}
+                            	               	
+                    </div>
+
+
+
+                </div>
+                <div class="tpl-block">
+                    <div class="am-g">
+                        <div class="am-u-sm-12 am-u-md-2">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {php}
+                            if( $order['status'] != 1 ){
+                        {/php}
+                        
+                        <div class="am-u-sm-12 am-u-md-1">
+                        	<div class="am-input-group" >
+                        	起始条码：
+                        	</div>
+                        </div>
+                        
+                        <div class="am-u-sm-12 am-u-md-2">
+                        	<div class="am-input-group" >
+                        	<input id='sxtm_ipt' value="{$sxtm}" type="text" class="am-form-field" placeholder="起始条码号" >
+                        	</div>
+                        </div>
+
+                        {php}
+                            }
+                        {/php}
+
+                        {php}
+                            if( $order['status'] != 1 ){
+
+                            
+                        {/php}
+                                <div class="am-u-sm-12 am-u-md-1">
+                                    <button id="create_sxtm_f" class="am-btn am-btn-success am-round"><i class="am-icon-plus"></i>一键生成水洗条码</button>
+                                </div>
+                        {php}
+                            }
+                        {/php}
+                        
+						
+
+
+						<div class="am-u-sm-12 am-u-md-1">
+ &nbsp;
+                        </div>
+
+                        {php}
+                            if( $orders_is_wc ){
+
+                            
+
+                            
+                        {/php}
+
+                        {php}
+                            }else{
+                        {/php}
+                            <div class="am-u-sm-12 am-u-md-1">
+                                <button id="quzou_all_f" class="am-btn am-btn-success am-round"><i class="am-icon-plus"></i>一键收取所有衣物</button>
+                            </div>
+                        {php}
+                            }
+                        {/php}
+
+                        {php}
+                        {/php}
+						
+						
+						<div class="am-u-sm-12 am-u-md-1">
+
+                        </div>
+
+                        <div class="am-u-sm-12 am-u-md-2" style="display: none;">
+                            <div class="am-input-group am-input-group-sm">
+                                <input id="tel_tz" type="text" class="am-form-field" placeholder="订单编号/顾客姓名/手机号..." value="">
+                                <span class="am-input-group-btn">
+						        	<button id="tel_tz_f" class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
+						        </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-id">水洗条码</th>
+                                            
+                                            <th class="table-author am-hide-sm-only">标题</th>
+                                            <th class="table-author am-hide-sm-only">颜色</th>
+                                            <th class="table-author am-hide-sm-only">品牌</th>
+                                            <th class="table-author am-hide-sm-only">特殊处理</th>
+                                            <th class="table-author am-hide-sm-only">洗后效果</th>
+                                            <th class="table-author am-hide-sm-only">价格</th>
+                                            
+                                            <th class="table-author am-hide-sm-only">操作</th>
+                                            <th class="table-author am-hide-sm-only">退款</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+											{php}
+												if( is_array( $clothes ) ){
+													foreach( $clothes as $key => $val ){
+											{/php}
+														<tr clothes_id="{$val['clothes_id']}">
+															<td >
+                                                                {php}
+                                                                    if( $val['shuixinum'] > 0){
+
+                                                                {/php}
+                                                                        {$val['shuixinum']}
+                                                                {php}
+                                                                    }else{
+                                                                {/php}
+                                                                        <a href="#" title="点击生成水洗条码" id="crt_sxtm" clothes_id="{$val['clothes_id']}">——</a>
+                                                                {php}
+                                                                    }
+                                                                {/php}
+                                                                
+                                                                
+                                                            </td>
+															<td>{$val['title']}</td>
+															<td>{$val['color']}</td>
+															<td>{$val['brand']}</td>
+															<td>{$val['chuli']}</td>
+															<td>{$val['xiaoguo']}</td>
+															<td>{$val['jine']}元</td>
+															<td>
+                                                                {php}
+                                                                    if( $val['status'] == 2 || $val['status'] == 3 ){
+                                                                {/php}
+                                                                    已取走
+                                                                {php}
+                                                                    }else{
+                                                                {/php}
+                                                                    <div class="am-btn-toolbar">
+                                                                        <div class="am-btn-group am-btn-group-xs">
+                                                                            <button id="quzou_dange" type="button" class="copy_class am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-copy"></span> 取走</button>
+                                                                        </div>
+                                                                    </div>
+                                                                {php}
+                                                                    }
+                                                                {/php}
+
+
+                                                                
+                                                            </td>
+															<td><a href="#">退款</a></td>
+														</tr>
+											{php}
+													}
+												}
+											{/php}
+											
+											
+											
+                                    </tbody>
+                                </table>
+                                
+                              
+
+                                <div class="am-cf">
+
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination">
+											<button id="jiezhang" type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success" style="background-color: #F37B1D !important;float: right;"><i class="am-icon-rmb"></i>打印发票</button>
+                                        </ul>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="{$Think.PUBLIC_PATH}static/js/jquery.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/amazeui.min.js"></script>
+    <script src="{$Think.PUBLIC_PATH}static/js/app.js"></script>
+    
+    <script>
+		$(document).on('click', '#xj_btn', function(e) {
+			
+			window.location.href='{$Think.URL_PATH}gx/public/index/orders/fukuan/id/' + {$order['orders_id']} + '/payway/1';
+			
+		});
+		
+		$(document).on('click', '#wx_btn', function(e) {
+			
+			window.location.href='{$Think.URL_PATH}gx/public/index/orders/fukuan/id/' + {$order['orders_id']} + '/payway/2';
+			
+		});
+		
+		$(document).on('click', '#zfb_btn', function(e) {
+			
+			window.location.href='{$Think.URL_PATH}gx/public/index/orders/fukuan/id/' + {$order['orders_id']} + '/payway/3';
+			
+		});
+
+        $(document).on('click', '#crt_sxtm', function(e) {
+            var id = $(this).attr('clothes_id');
+            var sxtm = $('#sxtm_ipt').val()
+            window.location.href='{$Think.URL_PATH}gx/public/index/orders/createSxtm/id/' + id + '/sxtm/' + sxtm;
+        });
+
+        $(document).on('click', '#create_sxtm_f', function(e) {
+            var id = {$order['orders_id']};
+            var sxtm = $('#sxtm_ipt').val()
+            window.location.href='{$Think.URL_PATH}gx/public/index/orders/createSxtms/id/' + id + '/sxtm/' + sxtm;
+        });
+
+        $(document).on('click', '#quzou_all_f', function(e) {
+            var id = {$order['orders_id']};
+            window.location.href='{$Think.URL_PATH}gx/public/index/orders/shouquAll/id/' + id;
+        });
+
+        $(document).on('click', '#quzou_dange', function(e) {
+            var id = $(this).parents('tr').attr('clothes_id');
+
+            window.location.href='{$Think.URL_PATH}gx/public/index/orders/shouquClothes/id/' + id;
+        });
+
+        
+
+        
+    	
+    </script>
+
+</body>
+
+</html>
